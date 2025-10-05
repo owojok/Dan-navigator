@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "Nigeria Navigation",
+    "slug": "nigeria-navigation-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#2e7d32"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nigerianavapp.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#2e7d32"
+      },
+      "package": "com.nigerianavapp",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "pk.eyJ1Ijoib3dvb2RhbSIsImEiOiJjbWdkMGV1ODQxZjM0Mmpxd3VsNnQ5MjNvIn0.2qRb923UJlFox_3j2Fgvqw",
+          "RNMapboxMapsImpl": "mapbox"
+        }
+      ],
+      "expo-location"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c4b88edd-8061-4bf4-b5dc-003035acf913"
+      }
+    }
+  }
+}
