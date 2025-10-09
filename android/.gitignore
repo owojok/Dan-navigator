@@ -1,0 +1,23 @@
+# OSX
+#
+.DS_Store
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+
+# Bundle artifacts
+*.jsbundle
+# Secrets (NEVER commit these!)
+secrets.properties
+google-services.json 
+# Generated files
+build/
+*.apk
+*.aab
