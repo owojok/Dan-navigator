@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
-import { Button, Card, Text, ActivityIndicator } from 'react-native-paper';
+import { View, StyleSheet, Alert, Modal } from 'react-native';
+import { Button, Card, Text, ActivityIndicator, IconButton } from 'react-native-paper';
+import QRCode from 'react-native-qrcode-svg';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import MapboxGL from '@rnmapbox/maps';
 import * as Location from 'expo-location';
@@ -24,6 +25,7 @@ const MapScreen: React.FC = () => {
   
   const { currentLocation, setCurrentLocation } = useAppStore();
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
+  const [isQrModalVisible, setQrModalVisible] = useState(false);
 
   // Decode DAN to get destination
   const { 
@@ -174,8 +176,41 @@ const MapScreen: React.FC = () => {
             >
               Start Navigation
             </Button>
+
+            <IconButton
+              icon="qrcode"
+              size={24}
+              onPress={() => setQrModalVisible(true)}
+              style={styles.qrButton}
+            />
           </Card.Content>
         </Card>
+      )}
+
+      {danData && (
+        <Modal
+          transparent={true}
+          visible={isQrModalVisible}
+          onRequestClose={() => setQrModalVisible(false)}
+        >
+          <View style={styles.modalContainer}>
+            <Card style={styles.modalCard}>
+              <Card.Content>
+                <Text variant="titleMedium" style={styles.modalTitle}>
+                  DAN: {danData.formatted}
+                </Text>
+                <QRCode value={danData.dan} size={200} />
+                <Button
+                  mode="contained"
+                  onPress={() => setQrModalVisible(false)}
+                  style={styles.modalCloseButton}
+                >
+                  Close
+                </Button>
+              </Card.Content>
+            </Card>
+          </View>
+        </Modal>
       )}
     </View>
   );
@@ -230,6 +265,29 @@ const styles = StyleSheet.create({
   },
   navButton: {
     marginTop: 12,
+  },
+  qrButton: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalCard: {
+    width: '80%',
+    padding: 16,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  modalCloseButton: {
+    marginTop: 24,
   },
 });
 
