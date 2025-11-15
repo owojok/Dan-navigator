@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "National Hospital Abuja",
+        "category": "hospital",
+        "state": "FCT - Abuja"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.4914, 9.0522]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "University of Lagos",
+        "category": "school",
+        "state": "Lagos"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [3.3862, 6.5189]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Police Headquarters, Rivers State",
+        "category": "police",
+        "state": "Rivers"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [7.0142, 4.8156]
+      }
+    }
+  ]
+}

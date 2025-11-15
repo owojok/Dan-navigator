@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
+import { Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -9,12 +10,15 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import HomeScreen from './src/screens/HomeScreen';
 import MapScreen from './src/screens/MapScreen';
 import NavigationScreen from './src/screens/NavigationScreen';
+import QRScannerScreen from './src/screens/QRScannerScreen';
 import { theme } from './src/theme';
+import { databaseService } from './src/services/DatabaseService';
 
 export type RootStackParamList = {
   Home: undefined;
   Map: { dan?: string };
   Navigation: { destination: { latitude: number; longitude: number } };
+  QRScanner: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -28,6 +32,22 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
+  useEffect(() => {
+    const initializeApp = async () => {
+      try {
+        await databaseService.initDB();
+        console.log('Database initialized successfully');
+      } catch (error) {
+        Alert.alert(
+          'Initialization Error',
+          'Failed to initialize the application database. Please restart the app.'
+        );
+      }
+    };
+
+    initializeApp();
+  }, []);
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
@@ -59,6 +79,11 @@ export default function App() {
                 name="Navigation" 
                 component={NavigationScreen}
                 options={{ title: 'Navigation' }}
+              />
+              <Stack.Screen
+                name="QRScanner"
+                component={QRScannerScreen}
+                options={{ title: 'Scan DAN QR Code' }}
               />
             </Stack.Navigator>
           </NavigationContainer>

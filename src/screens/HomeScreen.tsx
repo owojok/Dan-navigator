@@ -6,7 +6,8 @@ import {
   Card, 
   Title, 
   Paragraph,
-  HelperText 
+  HelperText,
+  IconButton
 } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
@@ -114,6 +115,15 @@ const HomeScreen: React.FC = () => {
             style={styles.button}
           >
             Search & Navigate
+          </Button>
+
+          <Button
+            icon="qrcode-scan"
+            mode="outlined"
+            onPress={() => navigation.navigate('QRScanner')}
+            style={styles.button}
+          >
+            Scan QR Code
           </Button>
         </Card.Content>
       </Card>
